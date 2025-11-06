@@ -1,7 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import {useEffect, useState} from 'react';
+import api from './connection.ts';
 
 function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    api.get('/furniture')
+      .then(res => setMessage(res.data))
+      .catch(err => console.error(err));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +28,10 @@ function App() {
           Learn React
         </a>
       </header>
+
+      <ul>
+        {message}
+      </ul>
     </div>
   );
 }
