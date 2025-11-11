@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import {useEffect, useState} from 'react';
-import api from './connection.ts';
+import api from './project/ApiClient.ts';
 
 function App() {
   const [message, setMessage] = useState("");
