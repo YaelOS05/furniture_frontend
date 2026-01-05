@@ -1,28 +1,26 @@
 import './project/styles.css';
-import { Link } from 'react-router-dom';
 import { Route, BrowserRouter as Router, Routes} from "react-router-dom";
 import { HomePage } from "../src/project/ExampleImplementation.tsx"
+import Components from './project/Components.tsx';
+import FirstExcersice from './project/views/FirstExcersice.tsx';
+import Login from './project/views/Login.tsx';
+import Attendance from './project/views/Attendance.tsx';
+import SignUp from './project/views/SignUp.tsx';
 function App() {
 
   return (
-     <Router>
-      <div className="App">
-        <header className="App-header">
-
-          {/* 👇 Este es tu link dentro de App.js */}
-          <Link to="/about">Ir a About</Link>
-
-          <br /><br />
-
-          <Link to="/message">Ir a Home</Link>
-        </header>
-
-        {/* 👇 Aquí defines tus rutas */}
-        <Routes>
-          <Route path="/message" element={<HomePage />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="App">
+      <Router>
+          <Routes>
+            <Route path="/message" element={<HomePage />} />
+            <Route path="/components" element={<Components />} />
+            <Route path="/excersice" element={<FirstExcersice />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/attendance" element={<Attendance />} />
+            <Route path="/signup" element={<SignUp />} />
+          </Routes>
+      </Router>
+    </div>
   );
 }
 

@@ -1,4 +1,90 @@
 .App{
-    background-color: #282c34;
     min-height: 100vh;
+    background-color: #080E1F;
+    color: #fff;
+}
+
+/* header{
+    /* display: flex;
+    justify-content: center;
+} */
+
+h1{
+    background-color: aquamarine;
+}
+
+.container{
+    display: grid;
+    place-items: center;
+}
+
+.form{
+    background-color: #1C2130;
+    display: grid;
+    place-items: center;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+}
+
+.input-text{
+    background-color: #151928;
+    margin: 5px 10px;
+    padding: 0px;
+    position: relative;
+    width: 100%;
+    border: 1px solid #3d3d3d;
+    border-top: none;
+    border-radius: 5px;
+    /* overflow: hidden; */
+}
+
+.label-form{
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    color: #777;
+    font-size: 14px;
+    transform: translateY(-50%);
+    transition: 0.3s ease;
+    padding: 0 4px;
+    pointer-events: none;
+}
+
+.input-text input:focus + .label-form,
+.input-text input:not(:placeholder-shown) + .label-form {
+  top: 0;
+  font-size: 10px;
+  color: #92949D;
+}
+
+input{
+    background: none;
+    color: #EFF0F5;
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 0px 5px;
+    padding-top: 5px;
+    height: 30px;
+}
+.signup-form{
+    display: grid;
+    width: 25%;
+}
+
+.submit-button{
+    background-color: #081A1F;
+    height: 35px;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px, 10px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.submit-button:hover{
+    cursor: pointer;
 }
