@@ -9,7 +9,6 @@ export default function SignUp() {
         <Title text={"Sign Up"}/>
         <div className="signup-form">
             <form className="form">
-                form
                     <InputText  field={"Name"} type={"text"}/>
                     <InputText  field={"Last Name"} type={"text"}/>
                     <InputText  field={"Email"} type={"text"}/>

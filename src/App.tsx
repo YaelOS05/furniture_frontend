@@ -1,4 +1,6 @@
 import './project/styles.css';
+import './project/layout-styles.css';
+import './project/effect-styles.css';
 import { Route, BrowserRouter as Router, Routes} from "react-router-dom";
 import { HomePage } from "../src/project/ExampleImplementation.tsx"
 import Components from './project/Components.tsx';

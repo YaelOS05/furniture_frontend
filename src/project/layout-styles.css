@@ -1,0 +1,23 @@
+.App{
+    min-height: 100vh;
+    background-color: #080E1F;
+    color: #fff;
+}
+
+/**/
+.container{
+    display: grid;
+    place-items: center;
+}
+
+/*Form style*/
+.form{
+    background-color: #1C2130;
+    display: grid;
+    place-items: center;
+    padding: 10px;
+}
+
+.signup-form{
+    display: grid;
+}
