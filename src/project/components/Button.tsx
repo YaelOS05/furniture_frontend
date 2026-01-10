@@ -1,9 +1,20 @@
 import React from 'react'
-
-export default function Button({type}: {type:string}) {
+interface ButtonProps {
+  type?: "button" | "submit" | "reset";
+  onClick?: () => void;
+  children: React.ReactNode;
+}
+export default function Button({ 
+  type = "button",
+  onClick,
+  children,}: ButtonProps) {
   return (
-    <div className="submit-button">
-        <div>{type}</div>
-    </div>
+    <button
+      type={type}
+      onClick={onClick}
+      className="submit-button"
+    >
+      {children}
+    </button>
   )
 }

@@ -19,11 +19,10 @@ class ApiClient{
       ApiClient.instance.interceptors.response.use(
         (response) => response,
         (error: AxiosError) => {
-          throw new ApiError(error);
+          return Promise.reject(new ApiError(error));
         }
-        );
+      );
     }
-
     return ApiClient.instance;
   }
 }
