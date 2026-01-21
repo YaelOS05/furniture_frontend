@@ -11,4 +11,12 @@ export class UsersApi implements IUsersApi {
         const response = await this.client.post<IUsersResponse>("/api/users", body);
         return {data: response.data, status: response.status}
     }
+
+    async getAllUsers(): Promise<ApiResponse<IUsersResponse[]>> {
+        const response = await this.client.get<IUsersResponse[]>("/api/users");
+        return{
+            data: response.data,
+            status: response.status
+        }
+    }
 };

@@ -8,6 +8,7 @@ import FirstExcersice from './project/views/FirstExcersice.tsx';
 import Login from './project/views/Login.tsx';
 import Attendance from './project/views/Attendance.tsx';
 import SignUp from './project/views/SignUp.tsx';
+import AllUsers from './project/views/AllUsers.tsx';
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/attendance" element={<Attendance />} />
             <Route path="/signup" element={<SignUp />} />
+            <Route path="/users" element={<AllUsers />} />
           </Routes>
       </Router>
     </div>
