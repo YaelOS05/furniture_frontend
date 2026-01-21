@@ -53,3 +53,26 @@ input:focus{
     box-shadow: 0px 0px 10px #797979;
     transition: 0.5s ease;
 }
+
+/*card-box*/
+.card-box{
+    border: 1px solid gainsboro;
+    place-items: center;
+    padding: 0px 10px;
+    margin: 5px 10px; 
+}
+
+.card-header h3{
+    display: flex;
+    justify-content: end;
+    margin: 10px 5px;
+}
+
+.full-name{
+    display: inline-block;
+    place-items: center;
+}
+
+.type{
+    place-items: center;
+}

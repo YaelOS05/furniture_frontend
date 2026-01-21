@@ -19,4 +19,12 @@ export class UsersApi implements IUsersApi {
             status: response.status
         }
     }
+
+    async getUserById(userId: string): Promise<ApiResponse<IUsersResponse>> {
+        const response = await this.client.get<IUsersResponse>(`/api/users/${userId}`)
+        return {
+            data: response.data,
+            status: response.status
+        }
+    }
 };

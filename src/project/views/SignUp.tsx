@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ApiError } from '../ApiError.ts';
 import { ApiFactory } from '../ApiFactory.ts';
 import { ApiResponse } from '../ApiResponse.ts';
@@ -10,7 +10,7 @@ import { IUsersRequest } from '../IUsersRequest.ts';
 import { IUsersResponse } from '../IUsersResponse.ts';
 import { Feedback } from '../components/FeedBack.tsx';
 
-export default function SignUp() {
+export default function SignUp(userId: string | null) {
   const[form, setForm] = useState<IUsersRequest>({
     name: "",
     lastName: "",
@@ -56,6 +56,29 @@ export default function SignUp() {
       setMessage(null);
     }
   };
+
+  useEffect(() => {
+    if(!userId) return;
+    const fetchUser = async () => {
+      try{
+        const userApi = ApiFactory.getUserApi();
+        const data = await userApi.getUserById(userId);
+
+        setForm({
+          name: data.data.name,
+          lastName: data.data.lastName,
+          type: data.data.type,
+          email: data.data.email,
+          password: ""
+        });
+      }catch(error) {
+        console.error("Error al cargar el usuario", error);
+      }
+    };
+
+    fetchUser();
+  }, [userId])
+
   return (
     <div className="container">
         <Title text={"Sign Up"}/>
