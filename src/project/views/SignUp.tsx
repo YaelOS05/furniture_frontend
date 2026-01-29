@@ -9,8 +9,9 @@ import { HttpSuccessMessages } from '../HttpSuccessMessages.ts';
 import { IUsersRequest } from '../IUsersRequest.ts';
 import { IUsersResponse } from '../IUsersResponse.ts';
 import { Feedback } from '../components/FeedBack.tsx';
+import { useParams } from 'react-router-dom';
 
-export default function SignUp(userId: string | null) {
+export default function SignUp() {
   const[form, setForm] = useState<IUsersRequest>({
     name: "",
     lastName: "",
@@ -23,7 +24,7 @@ export default function SignUp(userId: string | null) {
   const [error, setError] = useState<string | null>(null);
   const [response, setResponse] = useState<ApiResponse<IUsersResponse> | null>();
   const [message, setMessage] = useState<string | null>(null);
-
+  const { userId } = useParams<{ userId: string}>();
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {

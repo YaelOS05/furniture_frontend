@@ -20,6 +20,7 @@ function App() {
           <Route path="/excersice" element={<FirstExcersice />} />
           <Route path="/login" element={<Login />} />
           <Route path="/attendance" element={<Attendance />} />
+          <Route path="/signup/:userId" element={<SignUp />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/users" element={<AllUsers />} />
         </Routes>
