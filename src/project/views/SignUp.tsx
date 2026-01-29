@@ -10,8 +10,10 @@ import { IUsersRequest } from '../IUsersRequest.ts';
 import { IUsersResponse } from '../IUsersResponse.ts';
 import { Feedback } from '../components/FeedBack.tsx';
 import { useParams } from 'react-router-dom';
+import { IFullUpdateUsersRequest } from '../IFullUpdateUsersRequest.ts';
+import { IUpdatePasswordRequest } from '../IUpdatePasswordRequest.ts';
 
-export default function SignUp() {
+export default function SignUp({isView=false}){
   const[form, setForm] = useState<IUsersRequest>({
     name: "",
     lastName: "",
@@ -20,17 +22,46 @@ export default function SignUp() {
     password: ""
   });
 
-  // const [loading, setLoading] = useState(false);
+  const[updateForm, setUpdateForm] = useState<IFullUpdateUsersRequest>({
+    name: "",
+    lastName: "",
+    type: "USER",
+    email: ""
+  });
+
+  const[updatePassword, setUpdatePassword] = useState<IUpdatePasswordRequest>({
+    password: ""
+  });
+
   const [error, setError] = useState<string | null>(null);
   const [response, setResponse] = useState<ApiResponse<IUsersResponse> | null>();
   const [message, setMessage] = useState<string | null>(null);
   const { userId } = useParams<{ userId: string}>();
+
+  type FormMode = "create" | "edit" | "view";
+  const formMode: FormMode = userId
+    ? isView
+      ? "view"
+      : "edit"
+    : "create";
+  const isEditable = formMode !== "view";
+  const isPasswordRequired = formMode === "create";
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setForm({
       ...form,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
+    });
+
+    setUpdateForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+
+    setUpdatePassword({
+      ...form,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -40,7 +71,15 @@ export default function SignUp() {
 
     try{
       const userApi = ApiFactory.getUserApi();
-      const data = userId ? userApi.getUserById(userId, form) : userApi.create(form)
+
+      let data: ApiResponse<IUsersResponse>;
+
+      if(userId){ 
+        data = await userApi.updateFullUser(userId, updateForm);
+        if(updatePassword.password && updatePassword.password.trim() !== "") await userApi.updatePassword(userId, updatePassword);
+      }else{
+        data =  await userApi.create(form);
+      }
 
       setMessage(HttpSuccessMessages[data.status]);
       setResponse(data);
@@ -48,7 +87,7 @@ export default function SignUp() {
     }catch(err) {
       if(err instanceof ApiError){ setError(err.getUserMessage());}
       else {setError("No waited error");}
-    } finally {}
+    }
 
     function resetValueDefaultsNewRequest() {
       // setLoading(true);
@@ -93,7 +132,12 @@ export default function SignUp() {
                       type={"text"}/>
                     <InputText  onChange={handleChange} value={form.lastName} name={"lastName"} field={"Last Name"} type={"text"}/>
                     <InputText  onChange={handleChange} value={form.email} name={"email"} field={"Email"} type={"text"}/>
-                    <InputText  onChange={handleChange} value={form.password} name={"password"} field={"Password"} type={"password"}/>
+                    <InputText  onChange={handleChange} value={form.password} name={"password"} field={
+                      formMode === "create" ?
+                      "Password": "New password (optional)"}
+                      required={isPasswordRequired}
+                      disabled={!isEditable}
+                      type={"password"}/>
                     <Button  type={"submit"}>Submit</Button>
                     <Feedback message={message} error={error} />
             </form>

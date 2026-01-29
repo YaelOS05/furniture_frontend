@@ -4,6 +4,7 @@ import { IUsersRequest } from "./IUsersRequest.ts";
 import { IFullUpdateUsersRequest } from "./IFullUpdateUsersRequest";
 import { IUsersResponse } from "./IUsersResponse";
 import { ApiResponse } from "./ApiResponse";
+import { IUpdatePasswordRequest } from "./IUpdatePasswordRequest.ts";
 
 export class UsersApi implements IUsersApi {
     constructor(private readonly client: AxiosInstance) {}
@@ -31,6 +32,14 @@ export class UsersApi implements IUsersApi {
 
     async updateFullUser(userId: string, payload: IFullUpdateUsersRequest): Promise<ApiResponse<IUsersResponse>> {
         const response = await this.client.put<IUsersResponse>(`/api/users/${userId}`, payload)
+        return {
+            data: response.data,
+            status: response.status
+        }
+    }
+
+    async updatePassword(userId: string, payload: IUpdatePasswordRequest): Promise<ApiResponse<IUsersResponse>> {
+        const response = await this.client.put<IUsersResponse>(`/api/users/${userId}/password`, payload);
         return {
             data: response.data,
             status: response.status
