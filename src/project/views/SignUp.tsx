@@ -40,7 +40,7 @@ export default function SignUp() {
 
     try{
       const userApi = ApiFactory.getUserApi();
-      const data = await userApi.create(form);
+      const data = userId ? userApi.getUserById(userId, form) : userApi.create(form)
 
       setMessage(HttpSuccessMessages[data.status]);
       setResponse(data);
