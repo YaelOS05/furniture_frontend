@@ -45,4 +45,12 @@ export class UsersApi implements IUsersApi {
             status: response.status
         }
     }
+
+    async deleteUser(userId: string): Promise<ApiResponse<IUsersResponse>> {
+        const response = await this.client.delete<IUsersResponse>(`/api/users/${userId}`);
+        return {
+            data: response.data,
+            status: response.status
+        }
+    }
 };

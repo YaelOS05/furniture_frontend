@@ -10,4 +10,5 @@ export interface IUsersApi{
     getAllUsers(): Promise<ApiResponse<IUsersResponse[]>>;
     getUserById(userId: string): Promise<ApiResponse<IUsersResponse>>;
     updateFullUser(userId: string, payload: IFullUpdateUsersRequest): Promise<ApiResponse<IUsersResponse>>;
+    deleteUser(userId: string): Promise<ApiResponse<IUsersResponse>>;
 }
